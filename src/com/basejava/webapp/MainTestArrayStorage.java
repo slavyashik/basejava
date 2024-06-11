@@ -1,40 +1,34 @@
 package com.basejava.webapp;
 
 import com.basejava.webapp.model.Resume;
-import com.basejava.webapp.storage.ArrayStorage;
+import com.basejava.webapp.storage.SortedArrayStorage;
+import com.basejava.webapp.storage.Storage;
 
 public class MainTestArrayStorage {
-    static final ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         Resume r1 = new Resume();
-        r1.uuid = "uuid1";
+        r1.setUuid("uuid1");
         Resume r2 = new Resume();
-        r2.uuid = "uuid2";
+        r2.setUuid("uuid2");
         Resume r3 = new Resume();
-        r3.uuid = "uuid3";
+        r3.setUuid("uuid3");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
         ARRAY_STORAGE.save(r3);
-        ARRAY_STORAGE.save(r3);
-        System.out.println();
 
-        System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.uuid));
+        System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
         System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
-        System.out.println();
-
-        Resume r5 = new Resume();
-        r5.uuid = "uuid5";
-        System.out.println("Update: " + r5);
-        ARRAY_STORAGE.update(r5);
-        System.out.println("Update: " + r3);
-        ARRAY_STORAGE.update(r3);
-        System.out.println();
 
         printAll();
-        ARRAY_STORAGE.delete(r1.uuid);
+        ARRAY_STORAGE.delete(r1.getUuid());
+        System.out.println("Updating r2");
+        ARRAY_STORAGE.update(r2);
+        System.out.println("Updating r1");
+        ARRAY_STORAGE.update(r1);
         printAll();
         ARRAY_STORAGE.clear();
         printAll();

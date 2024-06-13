@@ -35,7 +35,7 @@ public abstract class AbstractArrayStorage implements Storage {
         return Arrays.copyOf(storage, size);
     }
 
-    public void save(Resume r) {
+    final public void save(Resume r) {
         int index = getIndex(r.getUuid());
         if (index >= 0) {
             System.out.printf("%s%s%n", ERROR_RESUME_EXISTS, r);
@@ -47,7 +47,7 @@ public abstract class AbstractArrayStorage implements Storage {
         }
     }
 
-    public void delete(String uuid) {
+    final public void delete(String uuid) {
         int index = getIndex(uuid);
 
         if (index < 0) {
@@ -59,7 +59,7 @@ public abstract class AbstractArrayStorage implements Storage {
         storage[size--] = null;
     }
 
-    public Resume get(String uuid) {
+    final public Resume get(String uuid) {
         int index = getIndex(uuid);
 
         if (index == -1) {
